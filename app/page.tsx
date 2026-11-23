@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import SpotExplorer from '../components/SpotExplorer';
 import { supabase } from '../lib/supabaseClient';
 import { Spot } from '../types';
@@ -34,6 +36,16 @@ export default async function HomePage() {
           </div>
         </div>
       </header>
+
+      {error && (
+        <div className="bg-red-100 text-red-800 p-3 text-xs">
+          エラー: {error.message}（code: {error.code}）
+        </div>
+      )}
+
+      <div className="bg-slate-100 text-slate-700 p-2 text-xs">
+        URL: {process.env.NEXT_PUBLIC_SUPABASE_URL} / data: {JSON.stringify(data?.slice(0, 1))}
+      </div>
 
       <SpotExplorer initialSpots={spotList} />
     </div>
